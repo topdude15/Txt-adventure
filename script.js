@@ -85,7 +85,7 @@ var whatToDoAreaText = "The description of the room that you are in will appear 
      document.getElementById("userChoice").value = nothingness;
   } else if (choice == goEast) {
      document.getElementById("output").innerHTML = nothingness;
-     waterFallRoom();
+     waterFallAccess();
   } else if (choice == goNorth) {
      document.getElementById("output").innerHTML = solidWallStart;
   } else if (choice == goSouth) {
@@ -96,16 +96,14 @@ var whatToDoAreaText = "The description of the room that you are in will appear 
     document.getElementById("output").innerHTML = areYouAliveItems[index];
     document.getElementById("userChoice").value = nothingness;
   } else if (choice == instructionsInput) {
-    instructions();
+    instructionsAccess();
   } else {
     var index = Math.floor(Math.random() * dontKnowItems.length);
     document.getElementById("output").innerHTML = dontKnowItems[index];
     document.getElementById("userChoice").value = nothingness;
   }
 }
-function instructions() {
-  var choice = document.getElementById("userChoice").value;
-  var choice = choice.toLowerCase();
+function instructionsAccess() {
   document.getElementById("userChoice").value = nothingness;
   document.getElementById("submit").onclick = instructions;
   document.getElementById("areaText").innerHTML = whatToDoAreaText;
@@ -113,6 +111,10 @@ function instructions() {
   document.getElementById("instr2").innerHTML = instr2;
   document.getElementById("instr3").innerHTML = instr3;
   document.getElementById("instr4").innerHTML = instr4;
+}
+function instructions() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
   if (choice == startInput) {
    document.getElementById("instr1").innerHTML = nothingness;
    document.getElementById("instr2").innerHTML = nothingness;
@@ -123,18 +125,18 @@ function instructions() {
     document.getElementById("output").innerHTML = typeToContinue;
   }
 }
-function waterFallRoom() {
+function waterFallAccess() {
    document.getElementById("submit").onclick = waterFallRoom;
-   var choice = document.getElementById("userChoice").value;
-   var choice = choice.toLowerCase();
    document.getElementById("output").innerHTML = nothingness;
    document.getElementById("areaText").innerHTML = waterFallDesc;
    document.getElementById("userChoice").value = nothingness;
    document.getElementById("areaName").innerHTML = waterFallName;
+}
+function waterFallRoom() {
+   var choice = document.getElementById("userChoice").value;
+   var choice = choice.toLowerCase();
   if (choice == goWest) {
-     document.getElementById("output").innerHTML = nothingness;
-     document.getElementById("areaText").innerHTML = startDesc
-     document.getElementById("userChoice").value = nothingness;
+     startRoomAccess();
   } else if (choice == goSouth) {
      orcRoom();
   } else if (choice == goWest) {
@@ -142,14 +144,16 @@ function waterFallRoom() {
      document.getElementById("output").innerHTML = areYouAliveItems[index];
    }    
 }
-function chainRoom() {
+function chainRoomAccess() {
    document.getElementById("submit").onclick = chainRoom;
-   var choice = document.getElementById("userChoice").value;
-   var choice = choice.toLowerCase();
    document.getElementById("output").innerHTML = nothingness;
    document.getElementById("areaText").innerHTML = chainRoomDesc;
    document.getElementById("userChoice").value = nothingness;
    document.getElementById("areaName").innerHTML = chainRoomName;
+}
+function chainRoom() {
+   var choice = document.getElementById("userChoice").value;
+   var choice = choice.toLowerCase();
    if (choice == layDown) {
      layingDownChainRoom();
    } else if (choice == goToChest) {
@@ -158,12 +162,14 @@ function chainRoom() {
      startRoom();
    }
 }
-function layingDownChainRoom() {
+function layingDownChainRoomAccess() {
   document.getElementById("submit").onclick = layingDownChainRoom;
-  var choice = document.getElementById("userChoice").value;
-  var choice = choice.toLowerCase();
   document.getElementById("output").innerHTML = nothingness;
   document.getElementById("userChoice").value = nothingness;
+}
+function layingDownChainRoom() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
   if (choice == goToChest) {
     document.getElementById("output").innerHTML = gottenToChest;
     atChestChainRoom();
@@ -171,11 +177,13 @@ function layingDownChainRoom() {
     document.getElementById("output").innerHTML = deadByBallStandUp;
   }
 }
-function atChestChainRoom() {
+function atChestChainRoomAccess() {
   document.getElementById("submit").onclick = atChestChainRoom;
+  document.getElementById("userChoice").innerHTML = nothingness;
+}
+function atChestChainRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  document.getElementById("userChoice").innerHTML = nothingness;
   if (choice == kickLock) {
     document.getElementById("output").innerHTML = chestOpen;
   } else if (choice == kickLockOther) {
@@ -187,40 +195,44 @@ function atChestChainRoom() {
   } else if (choice == nothingness) {
      var index = Math.floor(Math.random() * areYouAliveItems.length);
      document.getElementById("output").innerHTML = areYouAliveItems[index];
-  } else {
-
   }
 }
-function magnetRoom() {
+function magnetRoomAccess() {
   document.getElementById("submit").onclick = magnetRoom;
-  var choice = document.getElementById("userChoice").value;
-  var choice = choice.toLowerCase();
   document.getElementById("output").innerHTML = nothingness;
   document.getElementById("areaText").innerHTML = magnetRoomDesc;
   document.getElementById("userChoice").value = nothingness;
   document.getElementById("areaName").innerHTML = magnetRoomName;
 }
-function orcRoom() {
-  document.getElementById("submit").onclick = orcRoom;
+function magnetRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
+}
+function orcRoomAccess() {
+  document.getElementById("submit").onclick = orcRoom;
   document.getElementById("output").innerHTML = nothingness;
   document.getElementById("areaText").innerHTML = orcRoomDesc;
   document.getElementById("userChoice").value = nothingness;
   document.getElementById("areaName").innerHTML = orcRoomName;
+}
+function orcRoom() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
   if (choice == goEast) {
     document.getElementById("output").innerHTML = nothingness;
     cliff();
   }
 }
-function cliff() {
+function cliffAccess() {
   document.getElementById("submit").onclick = cliff;
-  var choice = document.getElementById("userChoice").value;
-  var choice = choice.toLowerCase();
   document.getElementById("output").innerHTML = nothingness;
   document.getElementById("areaText").innerHTML = cliffDesc;
   document.getElementById("userChoice").value = nothingness;
   document.getElementById("areaName").innerHTML = cliffRoomName;
+}
+function cliff() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
   if (choice == goNorth) {
     document.getElementById("output").innerHTML = deathByCliff;
   } else if (choice == goSouth) {
@@ -228,12 +240,14 @@ function cliff() {
     orcRoom(); 
   }
 }
-function armyOfBones() {
+function armyOfBonesAccess() {
   document.getElementById("submit").onclick = armyOfBones;
-  var choice = document.getElementById("userChoice").value;
-  var choice = choice.toLowerCase();
   document.getElementById("output").innerHTML = nothingness;
   document.getElementById("areaText").innerHTML = armyOfBonesDesc;
   document.getElementById("userChoice").value = nothingness;
   document.getElementById("areaName").innerHTML = armyOfBonesName;
+}
+function armyOfBones() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
 }
