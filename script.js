@@ -31,7 +31,7 @@ var punchLockOther = "punch the lock";  //Used to determine if the user wants to
 //DESCRIPTIONS
 var startDesc = "Your eyes snap open.  The dank smell of mildew is strong as you take a deep breath.  The room that you're in is dimly illuminated by a lantern.  There are two passageways leading south and east.";
 var waterFallDesc = "You emerge into open air, with the sound of a roaring waterfall echoing around the cavern you are currently standing in.  A rainbow is reflected in the mist.  A cave entrance leads south, and a passage branches off to the west.";
-var orcRoomDesc = "As you stride into the expanse, the stench of dried blood catches you off guard.  All of the sudden, an axe comes swinging at your head!  You duck in time to see a large, grizzled orc staring down at you.  He seems to be guarding an entrance towards the southeast corner of the room.  Two other entrances enter from the west and north.";
+var orcRoomLiveDesc = "As you stride into the expanse, the stench of dried blood catches you off guard.  All of the sudden, an axe comes swinging at your head!  You duck in time to see a large, grizzled orc staring down at you.  He seems to be guarding an entrance towards the southeast corner of the room.  Two other entrances enter from the west and north.";
 var magnetRoomDesc = "As soon as you step into the room, your compass starts to go haywire.  There are exits on all walls, and without your compass there is no telling which way is which.";
 var chainRoomDesc = "As you stride into the room, you are almost clobbered by a swinging ball, which is connected to the ceiling by a long, rusty chain.  There's a small chest in the far corner of the room.  The only exits are on the north and east sides.";
 var longRoomDesc = "A gust of air hits you as you emerge into the long corridor.  Windows, large and proud, reveal nothing but earth and rocks.  In the distance to the south, you can see the outline of a doorway.  A winding passageway leads to the west.";
@@ -47,6 +47,8 @@ var solidWallStart = "You run your hand along the wall, searching for some sort 
 var chestOpen = "The lock has crumbled beneath your foot, making the chest pop open.  Inside, you see a rusty knife and a tattered cloth.";
 var punchChest = "You punch the lock, but fail to penetrate it.  Your knuckles now sting and you are purely angry.";
 var deathByCliff = "You step forward, and the floor beneath you begins to crumble.  You lose your footing, and go plummeting to the bottom of the ravine.  You are dead.";
+var tryToKillOrcNoWeapon = "You look at your hands, and, with no discerable weapon, you clench your fists and take a huge swing at the orc.  It easily sidesteps your blow and whips its massive axe through your stomach.  You are dead.";
+var tryToFleeOrcRoom = "You try to flee from the room, but you stumble and fall to your knees.  The last thing you will ever see is the cold, bare floor of this dungeon you were exiled to.  You can hear the orc's axe whirling through the air behind you, and you brace for the worst.  You are dead on impact.";
 //ROOM NAMES
 var startRoomName = "START ROOM";  //START ROOM NEEDS NEW NAME
 var chainRoomName = "CHAIN ROOM";
@@ -75,6 +77,8 @@ function splashScreen() {
     startRoomAccess();
   } else if (choice == instructionsInput){
     instructionsAccess();
+  } else{
+    document.getElementById("userChoice").value = nothingness;
   }
 }
 function startRoomAccess() { 
@@ -145,11 +149,19 @@ function waterFallRoom() {
   if (choice == goWest) {
      startRoomAccess();
   } else if (choice == goSouth) {
-     orcRoom();
+     orcRoomDetermine();
   } else if (choice == goWest) {
      var index = Math.floor(Math.random() * areYouAliveItems.length);
      document.getElementById("output").innerHTML = areYouAliveItems[index];
-   }    
+   } else if (choice == nothingness) {
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  }
 }
 function chainRoomAccess() {
    document.getElementById("submit").onclick = chainRoom;
@@ -162,12 +174,20 @@ function chainRoom() {
    var choice = document.getElementById("userChoice").value;
    var choice = choice.toLowerCase();
    if (choice == layDown) {
-     layingDownChainRoom();
-   } else if (choice == goToChest) {
+     layingDownChainRoomAccess();
+  } else if (choice == goToChest) {
      document.getElementById("output").innerHTML = deadByBall;
-   } else if (choice == goNorth) {
+  } else if (choice == goNorth) {
      startRoomAccess();
-   }
+  } else if (choice == nothingness) {
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  }
 }
 function layingDownChainRoomAccess() {
   document.getElementById("submit").onclick = layingDownChainRoom;
@@ -179,9 +199,17 @@ function layingDownChainRoom() {
   var choice = choice.toLowerCase();
   if (choice == goToChest) {
     document.getElementById("output").innerHTML = gottenToChest;
-    atChestChainRoom();
+    atChestChainRoomAccess();
   } else if (choice == standUp) {
     document.getElementById("output").innerHTML = deadByBallStandUp;
+  } else if (choice == nothingness) {
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
   }
 }
 function atChestChainRoomAccess() {
@@ -200,8 +228,13 @@ function atChestChainRoom() {
   } else if (choice == punchLockOther) {
     document.getElementById("output").innerHTML = punchLock;
   } else if (choice == nothingness) {
-     var index = Math.floor(Math.random() * areYouAliveItems.length);
-     document.getElementById("output").innerHTML = areYouAliveItems[index];
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
   }
 }
 function magnetRoomAccess() {
@@ -214,6 +247,32 @@ function magnetRoomAccess() {
 function magnetRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
+  if (choice == goNorth) {
+    document.getElementById("output").innerHTML = "LOL";
+  }  else if (choice == nothingness) {
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  }
+}
+function orcRoomDetermine() {
+  document.getElementById("areaText").innerHTML = orcRoomDesc;
+  document.getElementById("areaName").innerHTML = orcRoomName;
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("userChoice").value = nothingness;
+  if (orcAlive == trueCheck) {
+    if (haveKnife == falseCheck) {
+      document.getElementById("submit").onclick = orcRoomNoKnifeOrcAliveAccess;
+    } else if (haveKnife == trueCheck) {
+      document.getElementById("submit").onclick = orcRoomKnifeOrcAliveAccess;
+    }
+  } else if (orcAlive == falseCheck) {
+    document.getElementById("submit").onclick = orcRoomAccess;
+  }
 }
 function orcRoomAccess() {
   document.getElementById("submit").onclick = orcRoom;
@@ -227,8 +286,40 @@ function orcRoom() {
   var choice = choice.toLowerCase();
   if (choice == goEast) {
     document.getElementById("output").innerHTML = nothingness;
-    cliff();
+    cliffAccess();
+  } else if (choice == nothingness) {
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
   }
+}
+function orcRoomNoKnifeOrcAliveAccess() {
+  document.getElementById("submit").onclick = orcRoomNoKnifeOrcAlive;
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("areaText").innerHTML = orcRoomDesc;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaName").innerHTML = orcRoomName;
+}
+function orcRoomNoKnifeOrcAlive() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice == killOrc) {
+    document.getElementById("output").innerHTML = tryToKillOrcNoWeapon;
+  } else if (choice == killOrcOther) {
+    document.getElementById("output").innerHTML = tryToKillOrcNoWeapon;
+  } else if (choice == goNorth) {
+    document.getElementById("ouput").innerHTML = tryToFleeOrcRoom;
+  } else if (choice == goWest) {
+    document.getElementById("output").innerHTML = tryToFleeOrcRoom;
+  } else if (choice == goEast) {
+    document.getElementById("output").innerHTML = tryToFleeOrcRoom;
+  } else if (choice == goSouth) {
+    document.getElementById("output").innerHTML = tryToFleeOrcRoom;
+  } 
 }
 function cliffAccess() {
   document.getElementById("submit").onclick = cliff;
@@ -244,7 +335,15 @@ function cliff() {
     document.getElementById("output").innerHTML = deathByCliff;
   } else if (choice == goSouth) {
     document.getElementById("output").innerHTML = nothingness;
-    orcRoom(); 
+    orcRoomDetermine(); 
+  } else if (choice == nothingness) {
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
   }
 }
 function armyOfBonesAccess() {

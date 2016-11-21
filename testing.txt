@@ -386,3 +386,42 @@ function armyOfBones() {
   document.getElementById("userChoice").value = nothingness;
   document.getElementById("areaName").innerHTML = armyOfBonesName;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function orcRoomLiveAccess() {
+  document.getElementById("submit").onclick = orcRoomLive;
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("areaText").innerHTML = orcRoomLiveDesc;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaName").innerHTML = orcRoomName;
+}
+function orcRoomLive() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice == goNorth) {
+    waterFallAccess();
+  } else if (choice == killOrc) {
+     if (haveKnife = 0) {
+      document.getElementById("output").innerHTML = 
+     }
+  } else if (choice == killOrcOther) {
+
+  }
+}
