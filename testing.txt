@@ -224,3 +224,165 @@ function armyOfBones() {
   document.getElementById("userChoice").value = nothingness;
   document.getElementById("areaName").innerHTML = armyOfBonesName;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function instructions() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("submit").onclick = instructions;
+  document.getElementById("areaText").innerHTML = whatToDoAreaText;
+  document.getElementById("instr1").innerHTML = instr1;
+  document.getElementById("instr2").innerHTML = instr2;
+  document.getElementById("instr3").innerHTML = instr3;
+  document.getElementById("instr4").innerHTML = instr4;
+  if (choice == startInput) {
+   document.getElementById("instr1").innerHTML = nothingness;
+   document.getElementById("instr2").innerHTML = nothingness;
+   document.getElementById("instr3").innerHTML = nothingness;
+   document.getElementById("instr4").innerHTML = nothingness;
+   startRoom();
+  } else {
+    document.getElementById("output").innerHTML = typeToContinue;
+  }
+}
+function waterFallRoom() {
+   document.getElementById("submit").onclick = waterFallRoom;
+   var choice = document.getElementById("userChoice").value;
+   var choice = choice.toLowerCase();
+   document.getElementById("output").innerHTML = nothingness;
+   document.getElementById("areaText").innerHTML = waterFallDesc;
+   document.getElementById("userChoice").value = nothingness;
+   document.getElementById("areaName").innerHTML = waterFallName;
+  if (choice == goWest) {
+     document.getElementById("output").innerHTML = nothingness;
+     document.getElementById("areaText").innerHTML = startDesc
+     document.getElementById("userChoice").value = nothingness;
+  } else if (choice == goSouth) {
+     orcRoom();
+  } else if (choice == goWest) {
+     var index = Math.floor(Math.random() * areYouAliveItems.length);
+     document.getElementById("output").innerHTML = areYouAliveItems[index];
+   }    
+}
+function chainRoom() {
+   document.getElementById("submit").onclick = chainRoom;
+   var choice = document.getElementById("userChoice").value;
+   var choice = choice.toLowerCase();
+   document.getElementById("output").innerHTML = nothingness;
+   document.getElementById("areaText").innerHTML = chainRoomDesc;
+   document.getElementById("userChoice").value = nothingness;
+   document.getElementById("areaName").innerHTML = chainRoomName;
+   if (choice == layDown) {
+     layingDownChainRoom();
+   } else if (choice == goToChest) {
+     document.getElementById("output").innerHTML = deadByBall;
+   } else if (choice == goNorth) {
+     startRoom();
+   }
+}
+function layingDownChainRoom() {
+  document.getElementById("submit").onclick = layingDownChainRoom;
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("userChoice").value = nothingness;
+  if (choice == goToChest) {
+    document.getElementById("output").innerHTML = gottenToChest;
+    atChestChainRoom();
+  } else if (choice == standUp) {
+    document.getElementById("output").innerHTML = deadByBallStandUp;
+  }
+}
+function atChestChainRoom() {
+  document.getElementById("submit").onclick = atChestChainRoom;
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  document.getElementById("userChoice").innerHTML = nothingness;
+  if (choice == kickLock) {
+    document.getElementById("output").innerHTML = chestOpen;
+  } else if (choice == kickLockOther) {
+    document.getElementById("output").innerHTML = chestOpen;
+  } else if (choice == punchLock) {
+    document.getElementById("output").innerHTML = punchLock;
+  } else if (choice == punchLockOther) {
+    document.getElementById("output").innerHTML = punchLock;
+  } else if (choice == nothingness) {
+     var index = Math.floor(Math.random() * areYouAliveItems.length);
+     document.getElementById("output").innerHTML = areYouAliveItems[index];
+  } else {
+
+  }
+}
+function magnetRoom() {
+  document.getElementById("submit").onclick = magnetRoom;
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("areaText").innerHTML = magnetRoomDesc;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaName").innerHTML = magnetRoomName;
+}
+function orcRoom() {
+  document.getElementById("submit").onclick = orcRoom;
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("areaText").innerHTML = orcRoomDesc;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaName").innerHTML = orcRoomName;
+  if (choice == goEast) {
+    document.getElementById("output").innerHTML = nothingness;
+    cliff();
+  }
+}
+function cliff() {
+  document.getElementById("submit").onclick = cliff;
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("areaText").innerHTML = cliffDesc;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaName").innerHTML = cliffRoomName;
+  if (choice == goNorth) {
+    document.getElementById("output").innerHTML = deathByCliff;
+  } else if (choice == goSouth) {
+    document.getElementById("output").innerHTML = nothingness;
+    orcRoom();
+  } else if (choice == goWest) {
+    document.getElementById("output").innerHTML = 
+  }
+}
+function armyOfBones() {
+  document.getElementById("submit").onclick = armyOfBones;
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("areaText").innerHTML = armyOfBonesDesc;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaName").innerHTML = armyOfBonesName;
+}

@@ -68,15 +68,17 @@ var instr3 = "Others include actions, like: kill [object], collect [item], inspe
 var instr4 = "To start the game, type in 'start' and click Continue";
 var typeToContinue = "Whoops!  That isn't right!  Type in 'start' and click Continue to start the game.";
 var whatToDoAreaText = "The description of the room that you are in will appear here.";
-function startRoom() {
+ function startRoomAccess() {
   document.getElementById("submit").onclick = startRoom;
-  var choice = document.getElementById("userChoice").value;
-  var choice = choice.toLowerCase(); 
   document.getElementById("output").innerHTML = nothingness;
   document.getElementById("areaText").innerHTML = startDesc;
   document.getElementById("userChoice").innerHTML = nothingness;
   document.getElementById("areaName").innerHTML = startRoomName;
   document.getElementById("userChoice").value = nothingness;
+ }
+ function startRoom() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase(); 
   if (choice == startInput) {
      document.getElementById("areaText").innerHTML = startDesc;
      document.getElementById("output").innerHTML = nothingness;
@@ -223,9 +225,7 @@ function cliff() {
     document.getElementById("output").innerHTML = deathByCliff;
   } else if (choice == goSouth) {
     document.getElementById("output").innerHTML = nothingness;
-    orcRoom();
-  } else if (choice == goWest) {
-    document.getElementById("output").innerHTML = 
+    orcRoom(); 
   }
 }
 function armyOfBones() {
