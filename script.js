@@ -63,20 +63,29 @@ var dontKnowItems  = ["I have no idea what you just said!", "Nope.  Doesn't ring
 //INSTRUCTIONS
 var instructionsInput = "instructions";
 var instr1 = "To play, read the description of the room that you are in and enter what you would like to do into the text box, then click Continue";
-var instr2 = "Some movement instructions include: go [north, south, east, west], lay down, go to [item].";
-var instr3 = "Others include actions, like: kill [object], collect [item], inspect [object].";
+var instr2 = "Some movement instructions include: go [north, south, east, west], lay down, go to [object].";
+var instr3 = "Others include actions, like: kill [creature], collect [item], inspect [object].";
 var instr4 = "To start the game, type in 'start' and click Continue";
 var typeToContinue = "Whoops!  That isn't right!  Type in 'start' and click Continue to start the game.";
 var whatToDoAreaText = "The description of the room that you are in will appear here.";
- function startRoomAccess() {
+function splashScreen() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if(choice == startInput){
+    startRoomAccess();
+  } else if (choice == instructionsInput){
+    instructionsAccess();
+  }
+}
+function startRoomAccess() { 
   document.getElementById("submit").onclick = startRoom;
   document.getElementById("output").innerHTML = nothingness;
   document.getElementById("areaText").innerHTML = startDesc;
   document.getElementById("userChoice").innerHTML = nothingness;
   document.getElementById("areaName").innerHTML = startRoomName;
   document.getElementById("userChoice").value = nothingness;
- }
- function startRoom() {
+}
+function startRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase(); 
   if (choice == startInput) {
@@ -90,13 +99,11 @@ var whatToDoAreaText = "The description of the room that you are in will appear 
      document.getElementById("output").innerHTML = solidWallStart;
   } else if (choice == goSouth) {
     document.getElementById("output").innerHTML = nothingness;
-    chainRoom();
+    chainRoomAccess();
   } else if (choice == nothingness) {
     var index = Math.floor(Math.random() * areYouAliveItems.length);
     document.getElementById("output").innerHTML = areYouAliveItems[index];
     document.getElementById("userChoice").value = nothingness;
-  } else if (choice == instructionsInput) {
-    instructionsAccess();
   } else {
     var index = Math.floor(Math.random() * dontKnowItems.length);
     document.getElementById("output").innerHTML = dontKnowItems[index];
@@ -120,7 +127,7 @@ function instructions() {
    document.getElementById("instr2").innerHTML = nothingness;
    document.getElementById("instr3").innerHTML = nothingness;
    document.getElementById("instr4").innerHTML = nothingness;
-   startRoom();
+   startRoomAccess();
   } else {
     document.getElementById("output").innerHTML = typeToContinue;
   }
@@ -159,7 +166,7 @@ function chainRoom() {
    } else if (choice == goToChest) {
      document.getElementById("output").innerHTML = deadByBall;
    } else if (choice == goNorth) {
-     startRoom();
+     startRoomAccess();
    }
 }
 function layingDownChainRoomAccess() {
